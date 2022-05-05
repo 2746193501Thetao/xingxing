@@ -43,9 +43,9 @@
                             )
         values
         <trim prefix=" (" suffix=")" suffixOverrides="," >
-                            #{articleName},
+                            #{articleName}
                         <if test="articleType!=null and articleType!=''">
-                            #{articleType},
+                            #{articleType}
                         </if>
                         now()
         </trim>
