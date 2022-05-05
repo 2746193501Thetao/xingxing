@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tao.springboot.dao.ArticleDao">
+
+
+    <!--根据 文章类型 进行查询文章-->
+    <select id="inquireArticleBook" parameterType="string" resultType="com.tao.springboot.entity.Article">
+        select * from Article where Article_type = #{Article_type}
+    </select>
+
+    <!--模糊查询书籍 -->
+    <!--原SQL  select * from Article where Article_name like '%${bookName}%'   不安全 会出现SQL注入问题-->
+    <select id="confusedQueryBook" resultType="com.tao.springboot.entity.Article" parameterType="string">
+        select * from Article where Article_name like   concat('%',#{bookName},'%')
+    </select>
+    <!--按时间查询数据 升序-->
+    <select id="sortByTime" resultType="com.tao.springboot.entity.Article">
+        select * from Article order by article_create_date
+    </select>
+
+    <select id="sortByTime_desc" resultType="com.tao.springboot.entity.Article">
+        select * from Article order by article_create_date desc
+    </select>
+
+    <update id="likes" parameterType="int">
+        update article set Article_likes = Article_likes+1 where Article_id = #{id}
+    </update>
+
+    <update id="noLikes" parameterType="int">
+        update article set Article_likes = Article_likes-1 where Article_id = #{id}
+    </update>
+
+    <!-- 管理系统
+     insert into a() values
+     -->
+    <insert id="addArticle" parameterType="com.tao.springboot.entity.Article">
+        insert into article(
+                                Article_name,
+                            <if test="articleType!=null and articleType!=''">
+                                Article_type,
+                            </if>
+                            Article_create_date
+                            )
+        values
+        <trim prefix=" (" suffix=")" suffixOverrides="," >
+                            #{articleName},
+                        <if test="articleType!=null and articleType!=''">
+                            #{articleType},
+                        </if>
+                        now()
+        </trim>
+    </insert>
+
+
+    <select id="findArticleType" resultType="com.tao.springboot.entity.Article">
+        select Article_type from article
+    </select>
+
+
+    <select id="conditionFind" resultType="com.tao.springboot.entity.Article" parameterType="com.tao.springboot.entity.Article">
+        select * from  article
+        <trim prefix="where" suffixOverrides="and || or">
+            <if test="articleName!=null and articleName!=''">
+                  Article_name = #{articleName} or
+            </if>
+            <if test="articleType!=null and articleType!=''">
+                  Article_type = #{articleType}
+            </if>
+        </trim>
+
+    </select>
+
+
+    <delete id="batchDeleteArticle" >
+      delete for article where Article_id in
+      <foreach collection="id" item="Aid" separator=",">
+          (#{Aid})
+      </foreach>
+
+    </delete>
+
+
+
+
+
+
+
+
+
+
+        </mapper>

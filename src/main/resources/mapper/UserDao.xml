@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tao.springboot.dao.UserDao">
+
+    <!--u.username,u.password-->
+    <select id="UserLogin" resultType="com.tao.springboot.entity.User" parameterType="com.tao.springboot.entity.User">
+        select u.id, u.username,u.password from user u  where username=#{username} and password=#{password}
+    </select>
+
+
+</mapper>
