@@ -6,9 +6,7 @@ import com.tao.springboot.entity.User;
 import com.tao.springboot.exceptionHandler.exception.UniteException;
 import com.tao.springboot.service.IUserService;
 import com.tao.springboot.utils.UserThreadLocalUtils;
-import com.tao.springboot.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
@@ -28,7 +26,6 @@ public class UserController {
         try{
             User user = iUserService.UserLogin(userlogin);
             if (user!=null){
-                UserThreadLocalUtils.setUser(user);
                 return new ProcessResult(200,"登录成功",user);
             }
         }catch (Exception e){

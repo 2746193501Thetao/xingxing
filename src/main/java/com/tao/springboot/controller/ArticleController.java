@@ -3,15 +3,10 @@ package com.tao.springboot.controller;
 import cn.hutool.core.util.BooleanUtil;
 import com.tao.springboot.entity.Article;
 import com.tao.springboot.entity.ProcessResult;
-import com.tao.springboot.entity.User;
 import com.tao.springboot.service.ArticleService;
-import com.tao.springboot.service.Impl.ArticleServiceImpl;
-import com.tao.springboot.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;

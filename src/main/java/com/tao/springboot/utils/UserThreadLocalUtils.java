@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserThreadLocalUtils {
-  private static final ThreadLocal<User> tl = new ThreadLocal();
+  /*private static final ThreadLocal<User> tl = new ThreadLocal();
 
 
     public static void setUser(User user){
@@ -17,5 +17,5 @@ public class UserThreadLocalUtils {
 
     public static void removeUser(){
         tl.remove();
-    }
+    }*/
 }
